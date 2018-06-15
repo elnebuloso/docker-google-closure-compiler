@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     image = docker.build("elnebuloso/google-closure-compiler", "--build-arg VERSION=${params.version} --pull --rm --no-cache -f Dockerfile .")
-                    image.inside("--entrypoint=''") {
+                    image.witRun("--entrypoint=''", 'sh') {
                         version = sh(script: "closure-compiler --version", returnStdout: true).trim()
                     }
                 }
