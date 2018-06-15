@@ -11,4 +11,4 @@ compiler=$(find /tmp -type f -name "closure-compiler*")
 
 #######################################################################################################
 
-$java_bin $java_opt -jar $compiler "$@";
+$java_bin -jar $compiler "$@";
