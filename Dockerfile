@@ -7,11 +7,13 @@ ADD docker/bin /usr/local/bin
 ADD https://dl.google.com/closure-compiler/compiler-${VERSION}.zip /tmp
 
 RUN echo "configure /usr/local/bin" \
-    && cd /tmp \
+    && mkdir -p /opt \
+    && cd /opt \
     && unzip /tmp/compiler-${VERSION}.zip \
-    && chmod +x /tmp/* \
     && find /usr/local/bin -type f -name '*.sh' | while read f; do mv "$f" "${f%.sh}"; done \
-    && chmod +x /usr/local/bin/*
+    && chmod +x /usr/local/bin/* \
+    && chmod +x /opt/* \
+    && chmod +r /opt/*
 
 ENTRYPOINT ["closure-compiler"]
 CMD ["-"]
