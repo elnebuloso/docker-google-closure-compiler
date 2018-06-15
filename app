@@ -10,6 +10,10 @@ case "$1" in
         docker build --rm --pull --tag $tag --file Dockerfile .
     ;;
 
+    create.prev)
+        docker build --build-arg VERSION=20170806 --rm --pull --tag $tag --file Dockerfile .
+    ;;
+
     bash)
         docker run $tty --interactive --rm --entrypoint="" $tag sh
     ;;
@@ -26,11 +30,16 @@ case "$1" in
         docker run $tty --interactive --rm --workdir $(pwd) --volume $(pwd):$(pwd) $tag --compilation_level=SIMPLE --js=test/bootstrap-3.3.7-dist/js/bootstrap.js --js_output_file=test/compiled.js
     ;;
 
+    latest)
+        docker run $tty --interactive --rm elnebuloso/google-closure-compiler --version
+    ;;
+
     *)
         echo " - create"
         echo " - bash"
         echo " - check"
         echo " - help"
         echo " - test"
+        echo " - latest"
     ;;
 esac
