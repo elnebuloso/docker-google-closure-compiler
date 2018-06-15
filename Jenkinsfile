@@ -11,7 +11,7 @@ pipeline {
                 script {
                     image = docker.build("elnebuloso/google-closure-compiler", "--build-arg VERSION=${params.version} --pull --rm --no-cache -f Dockerfile .")
                     image.inside("--entrypoint=''") {
-                        version = sh(script: "closure-compiler --version", returnStdout: true).trim()
+                        version = sh(script: "closure-compiler --version | grep -Eo '([0-9]{8})'", returnStdout: true).trim()
                     }
 
                     docker.withRegistry("https://registry.hub.docker.com", '061d45cc-bc11-4490-ac21-3b2276f1dd05'){
