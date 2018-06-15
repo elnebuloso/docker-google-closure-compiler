@@ -23,7 +23,7 @@ case "$1" in
     ;;
 
     test)
-        docker run run $tty --interactive --rm --workdir $(pwd) --volume $(pwd):$(pwd) $tag --compilation_level=SIMPLE --js=test/js/bootstrap.js --js_output_file=test/compiled.js
+        docker run $tty --interactive --rm --workdir $(pwd) --volume $(pwd):$(pwd) $tag --compilation_level=SIMPLE --js=test/bootstrap-3.3.7-dist/js/bootstrap.js --js_output_file=test/compiled.js
     ;;
 
     *)
@@ -31,5 +31,6 @@ case "$1" in
         echo " - bash"
         echo " - check"
         echo " - help"
+        echo " - test"
     ;;
 esac
